@@ -1,5 +1,5 @@
 "use client";
-import AddChildNodeModal from "@/components/TreeNodeManagement/AddChildNodeModal";
+import AddChildNodeModal from "@/components/TreeNodeManagement/AddNodeModal";
 import { EmptyTreeState } from "@/components/TreeNodeManagement/EmptyTreeState";
 import TreeNodeContainer from "@/components/TreeNodeManagement/TreeNodeContainer";
 import { Button } from "@/components/ui/button";
@@ -93,6 +93,7 @@ export default function Home() {
               <h1 className="text-lg font-semibold">Tree Structure</h1>
               {!isEmpty && (
                 <Button
+                  className="cursor-pointer"
                   variant="destructive"
                   onClick={() => setShowAddRootModal(true)}
                 >

@@ -22,10 +22,18 @@ function DeleteNodeModal({ onClose, onConfirm, nodeName }: DeleteModalProps) {
           Are you sure you want to delete "{nodeName}" and all its children?
         </p>
         <div className="flex gap-2 justify-end mt-4">
-          <Button onClick={onClose} variant="secondary">
+          <Button
+            className="cursor-pointer"
+            onClick={onClose}
+            variant="secondary"
+          >
             Cancel
           </Button>
-          <Button onClick={onConfirm} variant="destructive">
+          <Button
+            className="cursor-pointer"
+            onClick={onConfirm}
+            variant="destructive"
+          >
             Delete
           </Button>
         </div>

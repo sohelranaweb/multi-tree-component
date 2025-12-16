@@ -18,6 +18,7 @@ export function EmptyTreeState({ onAddRoot }: EmptyTreeStateProps) {
         Get started by adding your first node to the tree structure.
       </p>
       <Button
+        className="cursor-pointer"
         variant="secondary"
         onClick={onAddRoot}
         data-testid="button-add-first-node"

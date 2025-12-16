@@ -7,7 +7,7 @@ interface AddChildModalProps {
   onClose: () => void;
   onAdd: (label: string) => void;
 }
-function AddChildNodeModal({ onClose, onAdd }: AddChildModalProps) {
+function AddNodeModal({ onClose, onAdd }: AddChildModalProps) {
   const [label, setLabel] = useState("");
 
   //   handle add Node
@@ -48,10 +48,15 @@ function AddChildNodeModal({ onClose, onAdd }: AddChildModalProps) {
             autoFocus
           />
           <div className="flex gap-2 mt-4 justify-end">
-            <Button onClick={onClose} variant="destructive">
+            <Button
+              className="cursor-pointer"
+              onClick={onClose}
+              variant="destructive"
+            >
               Cancel
             </Button>
             <Button
+              className="cursor-pointer"
               onClick={handleSubmit}
               disabled={!label.trim()}
               variant="secondary"
@@ -65,4 +70,4 @@ function AddChildNodeModal({ onClose, onAdd }: AddChildModalProps) {
   );
 }
 
-export default AddChildNodeModal;
+export default AddNodeModal;

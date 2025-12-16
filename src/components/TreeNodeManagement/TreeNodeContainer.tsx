@@ -10,8 +10,8 @@ import {
   Trash2,
 } from "lucide-react";
 import { useState } from "react";
-import AddChildNodeModal from "./AddChildNodeModal";
 import DeleteNodeModal from "./DeleteNodeModal";
+import AddNodeModal from "./AddNodeModal";
 
 interface TreeNodeProps {
   node: TreeNodeType;
@@ -45,9 +45,9 @@ function TreeNodeContainer({
               className="p-0 hover:bg-gray-600 rounded"
             >
               {node.isExpanded ? (
-                <ChevronDown className="w-4 h-4 text-gray-400" />
+                <ChevronDown className="w-4 h-4 text-gray-400 cursor-pointer" />
               ) : (
-                <ChevronRight className="w-4 h-4 text-gray-400" />
+                <ChevronRight className="w-4 h-4 text-gray-400 cursor-pointer" />
               )}
             </button>
           )}
@@ -59,7 +59,10 @@ function TreeNodeContainer({
           )}
           <span className="text-gray-200 flex-1">{node.label}</span>
           <div className="relative">
-            <button onClick={() => setShowMenu(!showMenu)}>
+            <button
+              onClick={() => setShowMenu(!showMenu)}
+              className="p-1 opacity-0 group-hover:opacity-100 hover:bg-gray-600 rounded cursor-pointer"
+            >
               <MoreVertical className="w-4 h-4 text-gray-400" />
             </button>
             {showMenu && (
@@ -74,7 +77,7 @@ function TreeNodeContainer({
                       setShowMenu(false);
                       setShowAddModal(true);
                     }}
-                    className="w-full flex items-center gap-2 px-3 py-2 text-sm text-gray-200 hover:bg-gray-700"
+                    className="w-full flex items-center gap-2 px-3 py-2 text-sm text-gray-200 hover:bg-gray-700 cursor-pointer"
                   >
                     <Plus className="w-4 h-4" />
                     Add Child
@@ -84,7 +87,7 @@ function TreeNodeContainer({
                       setShowMenu(false);
                       setShowDeleteModal(true);
                     }}
-                    className="w-full flex items-center gap-2 px-3 py-2 text-sm text-red-400 hover:bg-gray-700"
+                    className="w-full flex items-center gap-2 px-3 py-2 text-sm text-red-400 hover:bg-gray-700 cursor-pointer"
                   >
                     <Trash2 className="w-4 h-4" />
                     Delete
@@ -110,20 +113,20 @@ function TreeNodeContainer({
         )}
       </div>
       {showAddModal && (
-        <AddChildNodeModal
+        <AddNodeModal
           onClose={() => setShowAddModal(false)}
           onAdd={(label) => onAddChild(node.id, label)}
         />
       )}
       {showDeleteModal && (
         <DeleteNodeModal
-          onClose={() => setShowAddModal(false)}
+          onClose={() => setShowDeleteModal(false)}
           onConfirm={() => {
             onDelete(node.id);
-            setShowAddModal(false);
+            setShowDeleteModal(false);
           }}
           nodeName={node.label}
-        ></DeleteNodeModal>
+        />
       )}
     </>
   );

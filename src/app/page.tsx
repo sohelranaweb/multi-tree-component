@@ -1,7 +1,13 @@
 "use client";
 import AddChildNodeModal from "@/components/TreeNodeManagement/AddChildNodeModal";
 import { EmptyTreeState } from "@/components/TreeNodeManagement/EmptyTreeState";
+import TreeNodeContainer from "@/components/TreeNodeManagement/TreeNodeContainer";
 import { Button } from "@/components/ui/button";
+import {
+  addChildToNode,
+  deleteNodeById,
+  toggleNode,
+} from "@/lib/treeNodeHelpers";
 import {
   STORAGE_KEY,
   TreeNode as TreeNodeType,
@@ -36,17 +42,37 @@ export default function Home() {
     }
   }, [treeData]);
 
+  // toggle If childNode is exist
+  const handleToggle = (id: string) => {
+    setTreeData(toggleNode(treeData, id));
+  };
+  // add child node
+  const handleAddChild = (parentId: string, label: string) => {
+    const newNode: TreeNodeType = {
+      id: Date.now().toString(),
+      label,
+    };
+    setTreeData(addChildToNode(treeData, parentId, newNode));
+    toast.success("Child Node added successfully!");
+  };
+  // Add Root Node
   const handleAddRoot = (label: string) => {
     const newNode: TreeNodeType = {
       id: Date.now().toString(),
       label,
     };
-    console.log("hadle root inside", newNode);
+    // console.log("hadle root inside", newNode);
     setTreeData([...treeData, newNode]);
     // Show toast
-    toast.success("Node added successfully!");
+    toast.success("Root Node added successfully!");
   };
-  console.log("tree data", treeData);
+
+  // Delete node byId
+  const handleDelete = (id: string) => {
+    setTreeData(deleteNodeById(treeData, id));
+    toast.success("Node deleted successfully!");
+  };
+  // console.log("tree data", treeData);
   return (
     <div className="min-h-screen bg-gray-900 text-white">
       <div className="md:w-7xl mx-auto">
@@ -82,11 +108,15 @@ export default function Home() {
                   onAddRoot={() => setShowAddRootModal(true)}
                 ></EmptyTreeState>
               ) : (
-                <>
-                  {treeData.map((item) => (
-                    <h1 key={item.id}>{item.label}</h1>
-                  ))}
-                </>
+                treeData.map((node) => (
+                  <TreeNodeContainer
+                    key={node.id}
+                    node={node}
+                    onToggle={handleToggle}
+                    onAddChild={handleAddChild}
+                    onDelete={handleDelete}
+                  ></TreeNodeContainer>
+                ))
               )}
             </div>
           </div>

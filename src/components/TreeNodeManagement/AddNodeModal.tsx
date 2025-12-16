@@ -33,9 +33,7 @@ function AddNodeModal({ onClose, onAdd }: AddChildModalProps) {
         className="bg-gray-800 rounded-lg p-6 w-96"
         onClick={(e) => e.stopPropagation()}
       >
-        <h2 className="text-xl font-semibold text-white mb-4">
-          Add Child Node
-        </h2>
+        <h2 className="text-xl font-semibold text-white mb-4">Add Node</h2>
         <div>
           <label>Node Label</label>
           <input

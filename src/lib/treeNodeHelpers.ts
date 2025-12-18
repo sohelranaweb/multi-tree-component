@@ -1,5 +1,5 @@
 import { TreeNode } from "@/types/treeNode.interface";
-
+// Toggle Node Function
 export const toggleNode = (nodes: TreeNode[], id: string): TreeNode[] => {
   return nodes.map((node) => {
     if (node.id === id) {
@@ -12,6 +12,7 @@ export const toggleNode = (nodes: TreeNode[], id: string): TreeNode[] => {
   });
 };
 
+// Add child node function
 export const addChildToNode = (
   nodes: TreeNode[],
   parentId: string,
@@ -36,6 +37,7 @@ export const addChildToNode = (
   });
 };
 
+// delete Node Function
 export const deleteNodeById = (nodes: TreeNode[], id: string): TreeNode[] => {
   return nodes
     .filter((node) => node.id !== id)
